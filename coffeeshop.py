@@ -9,13 +9,13 @@ class Abstract_Coffee(object):
 	and cannot itself be instantiatied. 
 	"""
 
-	def getCost(self):
+	def get_cost(self):
 		# An abstract cup of coffee has no cost, 
 		# so returns None. However, including this 
 		# definition is important because 
 		# our coffee decorator objects 
 		# like Sugar and Milk will assume they 
-		# can inherit the getCost behavior from 
+		# can inherit the get_cost behavior from 
 		# the decorated_coffee objects 
 		# passed to their __init__ constructors. 
 		# Since Sugar and Milk will only only ever 
@@ -26,9 +26,9 @@ class Abstract_Coffee(object):
 		# See below. 
 		pass
 
-	def getIngredients(self):
+	def get_ingredients(self):
 		# Same comments apply here as in 
-		# the definition of the getCost method above.
+		# the definition of the get_cost method above.
 		pass
 
 ########################################################################
@@ -36,12 +36,12 @@ class Concrete_Coffee(Abstract_Coffee):
 	""" Concrete subclass of abstract_coffee. 
 	This class does permit instantiation."""
 
-	def getCost(self):
-		# Override the getCost method of the abstract class.
+	def get_cost(self):
+		# Override the get_cost method of the abstract class.
 		return 1.00
 
-	def getIngredients(self):
-		# Override the getIngredients method of the abstract class.
+	def get_ingredients(self):
+		# Override the get_ingredients method of the abstract class.
 		return 'coffee'
 
 ########################################################################
@@ -56,7 +56,7 @@ class Abstract_Coffee_Decorator(Abstract_Coffee):
 	is a concrete instance of some subclass of abstract_coffee. 
 	In particular, it is presumed that 
 	the passed decorated_coffee object 
-	carries with it the getCost and getIngredients methods. 
+	carries with it the get_cost and get_ingredients methods. 
 
 	"""
 
@@ -68,13 +68,13 @@ class Abstract_Coffee_Decorator(Abstract_Coffee):
 		"""
 		self.decorated_coffee = decorated_coffee
 
-	def getCost(self):
-		# Inherit the behavior of getCost from the abstract_coffee super class.
-		return self.decorated_coffee.getCost()
+	def get_cost(self):
+		# Inherit the behavior of get_cost from the abstract_coffee super class.
+		return self.decorated_coffee.get_cost()
 
-	def getIngredients(self):
-		# Inherit the behavior of getIngredients from the abstract_coffee super class.
-		return self.decorated_coffee.getIngredients()
+	def get_ingredients(self):
+		# Inherit the behavior of get_ingredients from the abstract_coffee super class.
+		return self.decorated_coffee.get_ingredients()
 
 ########################################################################
 class Sugar(Abstract_Coffee_Decorator):
@@ -91,17 +91,17 @@ class Sugar(Abstract_Coffee_Decorator):
 		# Formally equivalent approach not taken here:
 		# self.decorated_coffee = decorated_coffee
 
-	def getCost(self):
+	def get_cost(self):
 		# Sugar is usually free
-		return self.decorated_coffee.getCost()
+		return self.decorated_coffee.get_cost()
 
-	def getIngredients(self):
+	def get_ingredients(self):
 		""" Now for the first example of decoration. 
 		This is an override of the 
-		inherited getIngredients method, with some 
+		inherited get_ingredients method, with some 
 		new behavior added on. 
 		"""
-		return self.decorated_coffee.getIngredients() + ', sugar'
+		return self.decorated_coffee.get_ingredients() + ', sugar'
 
 ########################################################################
 class Milk(Abstract_Coffee_Decorator):
@@ -109,15 +109,15 @@ class Milk(Abstract_Coffee_Decorator):
 	def __init__(self,decorated_coffee):
 		Abstract_Coffee_Decorator.__init__(self,decorated_coffee)
 
-	def getCost(self):
+	def get_cost(self):
 		# Milk is usually free, 
 		# but for illustration purposes, 
 		# let's suppose this coffee shop charges 
 		# an additional $0.25 for it.
-		return self.decorated_coffee.getCost() + 0.25
+		return self.decorated_coffee.get_cost() + 0.25
 
-	def getIngredients(self):
-		return self.decorated_coffee.getIngredients() + ', milk'
+	def get_ingredients(self):
+		return self.decorated_coffee.get_ingredients() + ', milk'
 
 ########################################################################
 class Vanilla(Abstract_Coffee_Decorator):
@@ -125,9 +125,9 @@ class Vanilla(Abstract_Coffee_Decorator):
 	def __init__(self,decorated_coffee):
 		Abstract_Coffee_Decorator.__init__(self,decorated_coffee)
 
-	def getCost(self):
-		return self.decorated_coffee.getCost() + 0.75
+	def get_cost(self):
+		return self.decorated_coffee.get_cost() + 0.75
 
-	def getIngredients(self):
-		return self.decorated_coffee.getIngredients() + ', vanilla'
+	def get_ingredients(self):
+		return self.decorated_coffee.get_ingredients() + ', vanilla'
 
