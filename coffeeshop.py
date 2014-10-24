@@ -31,6 +31,14 @@ class Abstract_Coffee(object):
 		# the definition of the get_cost method above.
 		pass
 
+	def get_tax(self):
+		# There is a 10% sales tax on the final cost 
+		# of the item. Note how the behavior of 
+		# this method changes with successive decorations. 
+		# get_tax multiplies 0.1 by what the decorated get_cost
+		# method returns, not the baseline get_cost method.
+		return 0.1*self.get_cost()
+
 ########################################################################
 class Concrete_Coffee(Abstract_Coffee):
 	""" Concrete subclass of abstract_coffee. 
